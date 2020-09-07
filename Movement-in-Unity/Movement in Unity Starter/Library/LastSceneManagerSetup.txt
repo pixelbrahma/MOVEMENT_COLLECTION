@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/RW/2D Platformer Movement/Scenes/2D Platformer Movement Scene.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
