@@ -32,20 +32,40 @@ using UnityEngine;
 
 public class TankMovement : MonoBehaviour
 {
-
+    [SerializeField] private float tankSpeed;
+    private Rigidbody tankRigidBody;
+    [SerializeField] private float movementInput;
+    [SerializeField] private float movementSpeed;
+    [SerializeField] private float turnSpeed;
+    [SerializeField] private float turnInput;
 
     void Start()
     {
-
+        tankRigidBody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-
+        turnInput = Input.GetAxis("Horizontal");
+        movementInput = Input.GetAxis("Vertical");
     }
 
     private void FixedUpdate()
     {
+        Move();
+        Turn();
+    }
 
+    private void Move()
+    {
+        Vector3 movement = transform.forward * movementInput * tankSpeed * Time.deltaTime;
+        tankRigidBody.MovePosition(transform.position + movement);
+    }
+
+    private void Turn()
+    {
+        float turn = turnInput * turnSpeed * Time.deltaTime;
+        Quaternion turnRotation = Quaternion.Euler(0, turn, 0);
+        tankRigidBody.MoveRotation(transform.rotation * turnRotation);
     }
 }

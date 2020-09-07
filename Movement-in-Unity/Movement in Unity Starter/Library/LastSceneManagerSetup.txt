@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/RW/3D ClickToRotate Movement/Scenes/3D ClickToRotate Movement Scene.unity
+- path: Assets/RW/3D Tank Movement/Scenes/3DTankScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
