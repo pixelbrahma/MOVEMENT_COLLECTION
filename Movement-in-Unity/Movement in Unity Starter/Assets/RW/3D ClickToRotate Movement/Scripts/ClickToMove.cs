@@ -29,18 +29,34 @@
  */
 
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ClickToMove : MonoBehaviour
 {
-
+    private Animator animator;
+    private NavMeshAgent navMeshAgent;
+    private Transform targetDestination;
 
     void Start()
     {
-
+        animator = GetComponent<Animator>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
+        if(Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
 
+            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+            {
+                navMeshAgent.destination = hit.point;
+                animator.SetBool("Walking", true);
+            }
+        }
+
+        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            animator.SetBool("Walking", false);
     }
 }
