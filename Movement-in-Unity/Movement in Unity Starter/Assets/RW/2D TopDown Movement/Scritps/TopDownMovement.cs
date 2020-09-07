@@ -32,15 +32,28 @@ using UnityEngine;
 
 public class TopDownMovement : MonoBehaviour
 {
-
+    [SerializeField] private float speed;
+    private Vector3 movement;
+    private Animator animator;
 
     void Start()
     {
-
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
+        movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 
+        SetAnimatorValues();
+
+        transform.position = transform.position + movement * speed * Time.deltaTime;
+    }
+
+    private void SetAnimatorValues()
+    {
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Amount", movement.magnitude);
     }
 }
